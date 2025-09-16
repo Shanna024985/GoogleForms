@@ -1,4 +1,5 @@
 const express = require("express");
+debugger
 require("dotenv").config();
 let app = express();
 let passport = require("passport")
@@ -15,8 +16,12 @@ require("./strategies/google.js")
 let mainRoutes = require("./routes/mainRoute.js");
 app.use("/api",mainRoutes);
 
+let pathForServingHtmlFile = path.join(__dirname,"..","googleFormsAutoClosure","dist")
+console.log(pathForServingHtmlFile)
+app.use("/",express.static(pathForServingHtmlFile))
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,"./googleFormsAutoClosure","src","dist","index.html"));
+debugger
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname,"..","googleFormsAutoClosure","dist","index.html"));
 });
 module.exports = app;
